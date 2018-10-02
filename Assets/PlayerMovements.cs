@@ -25,7 +25,7 @@ public class PlayerMovements : MonoBehaviour {
         SetDir();
         if (!dashing)
         {
-            transform.position += new Vector3(Input.GetAxis("Horizontal") * speed, Input.GetAxis("Vertical") * speed, 0);
+            transform.position += new Vector3(Input.GetAxis("Horizontal") * speed, 0, 0);
 
         }
         if (Input.GetButtonDown("Dash") && timerDash <= 0)
@@ -48,8 +48,8 @@ public class PlayerMovements : MonoBehaviour {
     }
 
 
-    private void Dash()
-    {
+    private void Dash() { 
+        Debug.Log("Dashing");
         dashing = true;
         timerDash = 0;
         if (oldPos < transform.position.x) //player moving to the right
@@ -58,42 +58,37 @@ public class PlayerMovements : MonoBehaviour {
             if (transform.position.x - oldPos >= dashDist)
             {
                 oldPos = transform.position.x;
-                dashing = false;
             }
-
         }
         else if (oldPos > transform.position.x) //player moving to the left
-        {
-            transform.position -= new Vector3(dashSpeed * Time.deltaTime, 0, 0);
+        { 
+            transform.position -= new Vector3(dashSpeed* Time.deltaTime, 0, 0);
             if (oldPos - transform.position.x >= dashDist)
             {
                 oldPos = transform.position.x;
-                dashing = false;
             }
         }
         else //player not moving, using old dir to choose
         {
-            if(dir == 1)
+            if (dir == 1)
             {
-                transform.position += new Vector3(dashSpeed * Time.deltaTime, 0, 0);
+                transform.position += new Vector3(dashSpeed* Time.deltaTime, 0, 0);
                 if (transform.position.x - oldPos >= dashDist)
                 {
                     oldPos = transform.position.x;
-                    dashing = false;
                 }
             }
-            if(dir == -1)
+            if (dir == -1)
             {
-                transform.position -= new Vector3(dashSpeed * Time.deltaTime, 0, 0);
+                transform.position -= new Vector3(dashSpeed* Time.deltaTime, 0, 0);
                 if (oldPos - transform.position.x >= dashDist)
                 {
                     oldPos = transform.position.x;
-                    dashing = false;
                 }
             }
         }
         timerDash = resetTimer;
+        dashing = false;
     }
-
 
 }
