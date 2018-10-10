@@ -8,13 +8,21 @@ public class VerticalCollide : MonoBehaviour {
 
     private Transform playerTrasform;
 
-    public float verticalSpeed ;
+    private float verticalSpeed  = 0;
     public float VerticalSpeed {
         get { return verticalSpeed; }
         set { verticalSpeed = value; } }
 
+    private float horizontalSpeed = 0;
+    public float HorizontalSpeed
+    {
+        get { return horizontalSpeed; }
+        set { horizontalSpeed = value; }
+    }
 
     private Ray2D verticalRay;
+
+    public float precision;
 
 
 
@@ -40,16 +48,15 @@ public class VerticalCollide : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        
-        if(verticalSpeed <= 0)
+
+        verticalRay.direction = new Vector2(horizontalSpeed, verticalSpeed);
+        if (verticalSpeed <= 0)
         {
-            verticalRay.origin = playerCollider.bounds.center - new Vector3(0, playerCollider.bounds.extents.y) + new Vector3(0, -0.01f, 0);
-            verticalRay.direction = new Vector2(0, -1);
+            verticalRay.origin = playerCollider.bounds.center - new Vector3(0, playerCollider.bounds.extents.y) + new Vector3(0, -precision, 0);
         }
         else
         {
-            verticalRay.origin = playerCollider.bounds.center + new Vector3(0, playerCollider.bounds.extents.y) + new Vector3(0, +0.01f, 0);
-            verticalRay.direction = new Vector2(0,1);
+            verticalRay.origin = playerCollider.bounds.center + new Vector3(0, playerCollider.bounds.extents.y) + new Vector3(0, precision, 0);
         }
 
         RaycastHit2D hit = Physics2D.Raycast(verticalRay.origin, verticalRay.direction, Mathf.Abs( verticalSpeed));
@@ -64,9 +71,23 @@ public class VerticalCollide : MonoBehaviour {
         {
             Debug.Log("Raycast hit nothing");
             playerTrasform.position += new Vector3(0, verticalSpeed);
-
-            Debug.Log(verticalSpeed);
+            
 
         }
+
+        // Rework des collisions :
+
+        // Todo : 4 raycast
+
+        // Collision :
+        //      - la plus proche -> déplacement au contact de la BondingBox !  => devrait fonctionner !
+        // Sinon : va !
+
+        // Problèmes : [] ---  avec déplacement horizontal -> pas de collision
+        // Est-ce un problème ? (cf jeux de plateforme classiques.)
+
+        // Attention : ray du bas / du haut ...
+
+
     }
 }
