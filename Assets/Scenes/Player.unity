@@ -3626,6 +3626,7 @@ GameObject:
   - component: {fileID: 812867188}
   - component: {fileID: 812867192}
   - component: {fileID: 812867191}
+  - component: {fileID: 812867194}
   - component: {fileID: 812867193}
   m_Layer: 0
   m_Name: Player
@@ -3739,20 +3740,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d612ac1cd28217d4abe829d8498e11ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  verticalSpeed: 0
+  precision: 0.0000001
 --- !u!114 &812867193
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 812867187}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 52873abcbfcd29d438dd2e6524696e84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: Fire1
-  impulseForce: 0.1
+  button: Jump
+  impulseForce: 0.2
+--- !u!114 &812867194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 812867187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bd09165c1f1ff4aa8d1e2d6541f87d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0.05
+  dashSpeed: 50
+  dashDist: 3
+  timerDash: 50
 --- !u!1 &817186699
 GameObject:
   m_ObjectHideFlags: 0
