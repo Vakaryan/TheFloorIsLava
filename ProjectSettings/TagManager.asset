@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Traversable
+  - Solid
+  - Deadly
   layers:
   - Default
   - TransparentFX
@@ -48,5 +51,5 @@ TagManager:
     uniqueID: 671308967
     locked: 0
   - name: Player
-    uniqueID: 2227053167
+    uniqueID: 1736391373
     locked: 0
