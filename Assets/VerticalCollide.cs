@@ -92,87 +92,109 @@ public class VerticalCollide : MonoBehaviour {
         rayC.direction = new Vector2(horizontalSpeed, verticalSpeed);
         rayD.direction = new Vector2(horizontalSpeed, verticalSpeed);
 
-        rayA.origin = new Vector2(-playerCollider.bounds.extents.x  + playerCollider.transform.position.x, -playerCollider.bounds.extents.y + playerCollider.transform.position.y);
-        rayB.origin = new Vector2(playerCollider.bounds.extents.x + playerCollider.transform.position.x, -playerCollider.bounds.extents.y + playerCollider.transform.position.y);
-        rayC.origin = new Vector2(playerCollider.bounds.extents.x + playerCollider.transform.position.x, playerCollider.bounds.extents.y + playerCollider.transform.position.y);
-        rayD.origin = new Vector2(-playerCollider.bounds.extents.x + playerCollider.transform.position.x, playerCollider.bounds.extents.y + playerCollider.transform.position.y);
-
-        //ContactFilter2D filter = new ContactFilter2D();
+        rayA.origin = new Vector2(-playerCollider.bounds.extents.x  + playerCollider.transform.position.x, playerCollider.bounds.extents.y + playerCollider.transform.position.y);
+        rayB.origin = new Vector2(playerCollider.bounds.extents.x + playerCollider.transform.position.x, playerCollider.bounds.extents.y + playerCollider.transform.position.y);
+        rayC.origin = new Vector2(playerCollider.bounds.extents.x + playerCollider.transform.position.x, -playerCollider.bounds.extents.y + playerCollider.transform.position.y );
+        rayD.origin = new Vector2(-playerCollider.bounds.extents.x + playerCollider.transform.position.x, -playerCollider.bounds.extents.y + playerCollider.transform.position.y );
+        
+        RaycastHit2D castResultsA = Physics2D.Raycast(rayA.origin, rayA.direction, new Vector2(horizontalSpeed, verticalSpeed).magnitude, LayerMask.GetMask("Solid"));
+        RaycastHit2D castResultsB = Physics2D.Raycast(rayB.origin, rayB.direction, new Vector2(horizontalSpeed, verticalSpeed).magnitude, LayerMask.GetMask("Solid"));
+        RaycastHit2D castResultsC = Physics2D.Raycast(rayC.origin, rayC.direction, new Vector2(horizontalSpeed, verticalSpeed).magnitude, LayerMask.GetMask("Solid"));
+        RaycastHit2D castResultsD = Physics2D.Raycast(rayD.origin, rayD.direction, new Vector2(horizontalSpeed, verticalSpeed).magnitude, LayerMask.GetMask("Solid"));
         
 
-        RaycastHit2D castResultsA = Physics2D.Raycast(rayA.origin, rayA.direction, new Vector2(verticalSpeed, horizontalSpeed).magnitude, LayerMask.GetMask("Solid"));
-        RaycastHit2D castResultsB = Physics2D.Raycast(rayB.origin, rayB.direction, new Vector2(verticalSpeed, horizontalSpeed).magnitude, LayerMask.GetMask("Solid"));
-        RaycastHit2D castResultsC = Physics2D.Raycast(rayC.origin, rayC.direction, new Vector2(verticalSpeed, horizontalSpeed).magnitude, LayerMask.GetMask("Solid"));
-        RaycastHit2D castResultsD = Physics2D.Raycast(rayD.origin, rayD.direction, new Vector2(verticalSpeed, horizontalSpeed).magnitude, LayerMask.GetMask("Solid"));
-        
-
-
-        playerTrasform.position += new Vector3(horizontalSpeed, verticalSpeed);
+        Vector2 futurePosition = playerTrasform.position + new Vector3(horizontalSpeed, verticalSpeed);
 
         //  collide left
-        if (horizontalSpeed < 0 && castResultsA.collider )
+
+        if (horizontalSpeed <= 0)
         {
-            if(castResultsA.distance != 0 || castResultsA.collider.bounds.min.y < playerCollider.bounds.max.y) // verifier que on n'est pas juste posés sur le plafond
-                playerTrasform.position = new Vector2(Mathf.Max(castResultsA.point.x, playerTrasform.position.x), playerTrasform.position.y);
-            speedManager(Direction.LEFT);
+            if ( castResultsA.collider )
+            {
+                 if (castResultsA.collider.bounds.max.x - 0.01f <= playerCollider.bounds.min.x)
+                {
+                    futurePosition = new Vector2(Mathf.Max(castResultsA.point.x + playerCollider.bounds.extents.x, futurePosition.x), futurePosition.y);
+                }
+                speedManager(Direction.LEFT);
+            }
+            if ( castResultsD.collider )
+            {
+                if (castResultsD.collider.bounds.max.x - 0.01f <= playerCollider.bounds.min.x)
+                {
+                    futurePosition = new Vector2(Mathf.Max(castResultsD.point.x + playerCollider.bounds.extents.x, futurePosition.x), futurePosition.y);
+                }
+                speedManager(Direction.LEFT);
+            }
         }
-        if (horizontalSpeed < 0 && castResultsD.collider )
-        {
-            if (castResultsD.distance != 0 || castResultsD.collider.bounds.max.y > playerCollider.bounds.min.y) // verifier que on n'est pas juste posés sur le sol
-                playerTrasform.position = new Vector2(Mathf.Max(castResultsD.point.x, playerTrasform.position.x), playerTrasform.position.y);
-            speedManager(Direction.LEFT);
-        }
+        
 
         // collide right
-        if (horizontalSpeed > 0 && castResultsB.collider)
+      
+        if (horizontalSpeed > 0)
         {
-            if (castResultsB.distance != 0 || castResultsB.collider.bounds.min.y < playerCollider.bounds.max.y) // verifier que on n'est pas juste posés sur le plafond
-                playerTrasform.position = new Vector2(Mathf.Min(castResultsB.point.x, playerTrasform.position.x), playerTrasform.position.y);
-            speedManager(Direction.RIGHT);
-        }
-        if (horizontalSpeed < 0 && castResultsC.collider)
-        {
-            if (castResultsC.distance != 0 || castResultsC.collider.bounds.max.y > playerCollider.bounds.min.y) // verifier que on n'est pas juste posés sur le sol
-                playerTrasform.position = new Vector2(Mathf.Min(castResultsC.point.x, playerTrasform.position.x), playerTrasform.position.y);
-            speedManager(Direction.RIGHT);
+            if (castResultsB.collider)
+            {
+                if (castResultsB.collider.bounds.min.x +0.01f > playerCollider.bounds.max.x) // verifier que on n'est pas juste posés sur le plafond
+                    futurePosition = new Vector2(Mathf.Min(castResultsB.point.x - playerCollider.bounds.extents.x, futurePosition.x), futurePosition.y);
+                
+               
+                speedManager(Direction.RIGHT);
+            }
+            if (castResultsC.collider)
+            {
+                if (castResultsC.collider.bounds.min.x + 0.01f  > playerCollider.bounds.max.x) // verifier que on n'est pas juste posés sur le sol
+                    futurePosition = new Vector2(Mathf.Min(castResultsC.point.x - playerCollider.bounds.extents.x, futurePosition.x), futurePosition.y);
+                speedManager(Direction.RIGHT);
+            }
         }
 
 
         // collide up
-        if (verticalSpeed > 0 && castResultsB.collider)
+        if (verticalSpeed >= 0)
         {
-            if (castResultsB.distance != 0 || castResultsB.collider.bounds.min.x < playerCollider.bounds.max.x) // verifier que on n'est pas juste posés sur le coté
-                playerTrasform.position = new Vector2( playerTrasform.position.x, Mathf.Min(castResultsB.point.y, playerTrasform.position.y));
-            speedManager(Direction.UP);
-        }
-        if (verticalSpeed > 0 && castResultsA.collider)
-        {
-            if (castResultsA.distance != 0 || castResultsA.collider.bounds.max.x > playerCollider.bounds.min.x) // verifier que on n'est pas juste posés sur le coté
-                playerTrasform.position = new Vector2(playerTrasform.position.x, Mathf.Min(castResultsA.point.y, playerTrasform.position.y));
-            speedManager(Direction.UP);
+            if ( castResultsB.collider)
+            {
+                 if (castResultsB.collider.bounds.min.y + 0.01f >= playerCollider.bounds.max.y)
+                {
+                    futurePosition = new Vector2(futurePosition.x, Mathf.Min(castResultsB.point.y - playerCollider.bounds.extents.y, futurePosition.y));
+                }
+                speedManager(Direction.UP);
+            }
+            if ( castResultsA.collider)
+            {
+                 if (castResultsA.collider.bounds.min.y + 0.01f >= playerCollider.bounds.max.y)
+                {
+                    futurePosition = new Vector2(futurePosition.x, Mathf.Min(castResultsA.point.y - playerCollider.bounds.extents.y, futurePosition.y));
+                }
+                speedManager(Direction.UP);
+            }
         }
 
         // collide down
-        if (verticalSpeed < 0 && castResultsC.collider)
+        if (verticalSpeed <= 0) //else
         {
-            if (castResultsC.distance != 0 || castResultsC.collider.bounds.min.x < playerCollider.bounds.max.x) // verifier que on n'est pas juste posés sur le coté
-                playerTrasform.position = new Vector2(playerTrasform.position.x, Mathf.Max(castResultsC.point.y, playerTrasform.position.y));
-            speedManager(Direction.DOWN);
-        }
-        if (verticalSpeed < 0 && castResultsD.collider)
-        {
+            if (castResultsC.collider)
+            {
+                 if(castResultsC.collider.bounds.max.y - 0.01f <= playerCollider.bounds.min.y)
+                {
+                    futurePosition = new Vector2(futurePosition.x, Mathf.Max(castResultsC.point.y + playerCollider.bounds.extents.y, futurePosition.y));
+                }
+                speedManager(Direction.DOWN);
+            }
+            if ( castResultsD.collider)
+            {
+                 if (castResultsC.collider.bounds.max.y - 0.01f <= playerCollider.bounds.min.y)
+                {
 
-            Debug.Log("down");
-            if (castResultsD.distance != 0 || castResultsD.collider.bounds.max.x < playerCollider.bounds.min.x) // verifier que on n'est pas juste posés sur le coté
-                playerTrasform.position = new Vector2(playerTrasform.position.x, Mathf.Max(castResultsD.point.y, playerTrasform.position.y));
-            speedManager(Direction.DOWN);
+                    futurePosition = new Vector2(futurePosition.x, Mathf.Max(castResultsC.point.y + playerCollider.bounds.extents.y, futurePosition.y));
+                }
+                speedManager(Direction.DOWN);
+            }
         }
 
-        
-        else
-        {
-            playerTrasform.position += new Vector3(horizontalSpeed, verticalSpeed);
-        }
+
+        playerTrasform.position = futurePosition;
+
     }
 
     private void speedManager(Direction collideDirection)
@@ -185,24 +207,17 @@ public class VerticalCollide : MonoBehaviour {
                 break;
             case Direction.LEFT:
                 Debug.Log("left");
-                horizontalSpeed = 0;
                 break;
             case Direction.RIGHT:
                 Debug.Log("right");
-                horizontalSpeed = 0;
                 break;
             case Direction.DOWN:
+                Debug.Log("down");
                 verticalSpeed = 0;
                 break;
         }
     }
-
-    // Update is called once per frame
-    void Update() {
-        
-        
-
-    }
+    
 
     private void LateUpdate()
     {
