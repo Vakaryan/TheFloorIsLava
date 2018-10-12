@@ -12,12 +12,18 @@ public class PlayerMovements : MonoBehaviour {
     private float oldPos;
     private int dir;
 
-	// Use this for initialization
-	void Start () {
+
+    private VerticalCollide vertPhysics;
+
+    // Use this for initialization
+    void Start () {
         oldPos = transform.position.x;
         dir = 1;
         resetTimer = timerDash;
-	}
+
+
+        vertPhysics = GetComponent<VerticalCollide>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -25,7 +31,7 @@ public class PlayerMovements : MonoBehaviour {
         SetDir();
         if (!dashing)
         {
-            transform.position += new Vector3(Input.GetAxis("Horizontal") * speed, 0, 0);
+            vertPhysics.HorizontalSpeed =  Input.GetAxis("Horizontal") * speed;
 
         }
         else
