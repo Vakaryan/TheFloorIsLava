@@ -17,14 +17,14 @@ public class PlayerMovements : MonoBehaviour {
     void Start () {
         oldPos = transform.position.x;
         dir = 1;
-        resetTimer = timerDash;
+        vertPhysics = GetComponent<VerticalCollide>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
         if (!dashing)
         {
-            transform.position += new Vector3(Input.GetAxis("Horizontal") * speed, 0, 0);
+            vertPhysics.HorizontalSpeed = Input.GetAxis("Horizontal") * speed;
 
         }
         else
@@ -76,8 +76,3 @@ public class PlayerMovements : MonoBehaviour {
 
 }
 
-
-
-        vertPhysics = GetComponent<VerticalCollide>();
-    }
-            vertPhysics.HorizontalSpeed =  Input.GetAxis("Horizontal") * speed;
