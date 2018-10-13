@@ -114,7 +114,7 @@ public class VerticalCollide : MonoBehaviour {
 
 
         // collide up
-        if (verticalSpeed >= 0)
+        if (verticalSpeed > 0)
         {
             if ( castResultsB.collider)
             {
@@ -135,7 +135,7 @@ public class VerticalCollide : MonoBehaviour {
         }
 
         // collide down
-        if (verticalSpeed <= 0) //else
+        if (verticalSpeed < 0) //else
         {
             if (castResultsC.collider)
             {
@@ -158,7 +158,7 @@ public class VerticalCollide : MonoBehaviour {
 
         //  collide left
 
-        if (horizontalSpeed <= 0)
+        if (horizontalSpeed < 0)
         {
             if (castResultsA.collider)
             {
@@ -181,7 +181,7 @@ public class VerticalCollide : MonoBehaviour {
 
         // collide right
 
-        if (horizontalSpeed >= 0)
+        if (horizontalSpeed > 0)
         {
             if (castResultsB.collider)
             {
@@ -210,17 +210,28 @@ public class VerticalCollide : MonoBehaviour {
             case Direction.UP:
                 Debug.Log("up");
                 verticalSpeed = 0;
+                GetComponent<Jump>().enabled = true;
+                GetComponent<WallJump>().enabled = false;
                 break;
             case Direction.LEFT:
                 Debug.Log("left");
+                GetComponent<Jump>().enabled = false;
+                GetComponent<WallJump>().enabled = true;
+                GetComponent<WallJump>().JumpDirection = WallJump.Direction.RIGHT;
                 break;
             case Direction.RIGHT:
                 Debug.Log("right");
+                GetComponent<Jump>().enabled = false;
+                GetComponent<WallJump>().enabled = true;
+                GetComponent<WallJump>().JumpDirection = WallJump.Direction.LEFT;
                 break;
             case Direction.DOWN:
                 Debug.Log("down");
                 verticalSpeed = 0;
+                GetComponent<Jump>().enabled = true;
+                GetComponent<WallJump>().enabled = false;
                 break;
+
         }
     }
     
