@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Traversable
+  - Solid
+  - Deadly
   layers:
   - Default
   - TransparentFX
@@ -13,7 +16,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Solid
   - 
   - 
   - 
@@ -46,4 +49,7 @@ TagManager:
     locked: 0
   - name: Platforms&Obstacles
     uniqueID: 671308967
+    locked: 0
+  - name: Player
+    uniqueID: 1736391373
     locked: 0
