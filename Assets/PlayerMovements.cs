@@ -76,3 +76,8 @@ public class PlayerMovements : MonoBehaviour {
 
 }
 
+
+
+        vertPhysics = GetComponent<VerticalCollide>();
+    }
+            vertPhysics.HorizontalSpeed =  Input.GetAxis("Horizontal") * speed;

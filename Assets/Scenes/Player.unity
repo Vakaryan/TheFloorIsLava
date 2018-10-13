@@ -3573,7 +3573,6 @@ GameObject:
   - component: {fileID: 812867190}
   - component: {fileID: 812867189}
   - component: {fileID: 812867188}
-  - component: {fileID: 812867192}
   - component: {fileID: 812867191}
   - component: {fileID: 812867194}
   - component: {fileID: 812867193}
@@ -3640,7 +3639,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1736391373
+  m_SortingLayerID: -2067914129
   m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: db2152a2016c25b42b208e152d05f400, type: 3}
@@ -3674,7 +3673,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 812867187}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a9fa059c3a7cef47bdd4936a91cfa0d, type: 3}
+  m_Script: {fileID: 11500000, guid: 68bd09165c1f1ff4aa8d1e2d6541f87d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   gravityAcceleration: 0.05
