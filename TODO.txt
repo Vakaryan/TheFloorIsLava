@@ -1,0 +1,2 @@
+Estéban -> wall jump, wall slide (très peu vers le haut, ralenti vers le bas)
+Léa -> déplacement avec plateformes, dash (changer horizontalSpeed de VerticalCollide), traverser plateformes (tag Traversable + changer les collides up/left/right)
