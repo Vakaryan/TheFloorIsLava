@@ -235,7 +235,7 @@ GameObject:
   - component: {fileID: 27392804}
   - component: {fileID: 27392806}
   - component: {fileID: 27392805}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wall (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -670,7 +670,7 @@ GameObject:
   - component: {fileID: 153140601}
   - component: {fileID: 153140603}
   - component: {fileID: 153140602}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -770,7 +770,7 @@ GameObject:
   - component: {fileID: 155571975}
   - component: {fileID: 155571974}
   - component: {fileID: 155571973}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MovingPlatform (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -885,7 +885,7 @@ GameObject:
   - component: {fileID: 211470379}
   - component: {fileID: 211470378}
   - component: {fileID: 211470377}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MovingPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1336,7 +1336,7 @@ GameObject:
   - component: {fileID: 313080728}
   - component: {fileID: 313080727}
   - component: {fileID: 313080726}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MovingPlatform (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1451,7 +1451,7 @@ GameObject:
   - component: {fileID: 395657410}
   - component: {fileID: 395657409}
   - component: {fileID: 395657408}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MovingPlatform (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1676,7 +1676,7 @@ GameObject:
   m_Component:
   - component: {fileID: 434123595}
   - component: {fileID: 434123594}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1734,7 +1734,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 434123593}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.23296, y: 0.076729, z: -1.8245826}
+  m_LocalPosition: {x: -0.53, y: -0.04, z: -1.8245826}
   m_LocalScale: {x: 171.36003, y: 100.94528, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2086,7 +2086,7 @@ GameObject:
   - component: {fileID: 593158979}
   - component: {fileID: 593158981}
   - component: {fileID: 593158980}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wall (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2409,7 +2409,7 @@ GameObject:
   - component: {fileID: 616056629}
   - component: {fileID: 616056631}
   - component: {fileID: 616056630}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2508,7 +2508,7 @@ GameObject:
   - component: {fileID: 628551943}
   - component: {fileID: 628551945}
   - component: {fileID: 628551944}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Rigth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3199,7 +3199,7 @@ GameObject:
   - component: {fileID: 734067577}
   - component: {fileID: 734067579}
   - component: {fileID: 734067578}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3411,7 +3411,7 @@ GameObject:
   - component: {fileID: 797183598}
   - component: {fileID: 797183597}
   - component: {fileID: 797183596}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MovingPlatform (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3525,7 +3525,7 @@ GameObject:
   - component: {fileID: 807992027}
   - component: {fileID: 807992029}
   - component: {fileID: 807992028}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3628,7 +3628,6 @@ GameObject:
   - component: {fileID: 812867191}
   - component: {fileID: 812867194}
   - component: {fileID: 812867193}
-  - component: {fileID: 812867195}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -3712,7 +3711,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 812867187}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.07, y: 4.05, z: 0}
+  m_LocalPosition: {x: -6.82, y: 4.19, z: 0}
   m_LocalScale: {x: 0.88963044, y: 2.0873327, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3741,7 +3740,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d612ac1cd28217d4abe829d8498e11ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  verticalSpeed: 0
+  verticalSpeed: -0.01
+  horizontalSpeed: 0
   precision: 0
 --- !u!114 &812867193
 MonoBehaviour:
@@ -3755,7 +3755,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: Jump
-  impulseForce: 0.2
+  impulseForce: 0.05
 --- !u!114 &812867194
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3771,26 +3771,6 @@ MonoBehaviour:
   dashSpeed: 50
   dashDist: 3
   timerDash: 50
---- !u!50 &812867195
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 812867187}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!1 &817186699
 GameObject:
   m_ObjectHideFlags: 0
@@ -4585,7 +4565,7 @@ GameObject:
   - component: {fileID: 1001973000}
   - component: {fileID: 1001973002}
   - component: {fileID: 1001973001}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wall (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4684,7 +4664,7 @@ GameObject:
   - component: {fileID: 1018490849}
   - component: {fileID: 1018490851}
   - component: {fileID: 1018490850}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5205,7 +5185,7 @@ GameObject:
   - component: {fileID: 1110584591}
   - component: {fileID: 1110584593}
   - component: {fileID: 1110584592}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wall (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5529,7 +5509,7 @@ GameObject:
   - component: {fileID: 1142710130}
   - component: {fileID: 1142710129}
   - component: {fileID: 1142710128}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MovingPlatform (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5755,7 +5735,7 @@ GameObject:
   - component: {fileID: 1279573641}
   - component: {fileID: 1279573643}
   - component: {fileID: 1279573642}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wall (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5787,7 +5767,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0003748834, y: 0.0057581943}
+  m_Offset: {x: -0.018373236, y: 0.005758196}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -5798,7 +5778,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.29975772, y: 0.09542598}
+  m_Size: {x: 0.33575442, y: 0.09542598}
   m_EdgeRadius: 0
 --- !u!212 &1279573643
 SpriteRenderer:
@@ -8500,7 +8480,7 @@ GameObject:
   - component: {fileID: 1866979984}
   - component: {fileID: 1866979986}
   - component: {fileID: 1866979985}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8914,7 +8894,7 @@ GameObject:
   - component: {fileID: 2118913086}
   - component: {fileID: 2118913085}
   - component: {fileID: 2118913084}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MovingPlatform (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9215,7 +9195,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.0000029951334, y: 0.0026037171}
