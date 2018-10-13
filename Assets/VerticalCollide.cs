@@ -111,7 +111,7 @@ public class VerticalCollide : MonoBehaviour {
         {
             if ( castResultsA.collider )
             {
-                 if (castResultsA.collider.bounds.max.x - 0.01f <= playerCollider.bounds.min.x)
+                 if (castResultsA.collider.bounds.max.x <= playerCollider.bounds.min.x)
                 {
                     futurePosition = new Vector2(Mathf.Max(castResultsA.point.x + playerCollider.bounds.extents.x, futurePosition.x), futurePosition.y);
                 }
@@ -119,7 +119,7 @@ public class VerticalCollide : MonoBehaviour {
             }
             if ( castResultsD.collider )
             {
-                if (castResultsD.collider.bounds.max.x - 0.01f <= playerCollider.bounds.min.x)
+                if (castResultsD.collider.bounds.max.x <= playerCollider.bounds.min.x)
                 {
                     futurePosition = new Vector2(Mathf.Max(castResultsD.point.x + playerCollider.bounds.extents.x, futurePosition.x), futurePosition.y);
                 }
@@ -134,7 +134,7 @@ public class VerticalCollide : MonoBehaviour {
         {
             if (castResultsB.collider)
             {
-                if (castResultsB.collider.bounds.min.x +0.01f > playerCollider.bounds.max.x) // verifier que on n'est pas juste posés sur le plafond
+                if (castResultsB.collider.bounds.min.x >= playerCollider.bounds.max.x) // verifier que on n'est pas juste posés sur le plafond
                     futurePosition = new Vector2(Mathf.Min(castResultsB.point.x - playerCollider.bounds.extents.x, futurePosition.x), futurePosition.y);
                 
                
@@ -142,7 +142,7 @@ public class VerticalCollide : MonoBehaviour {
             }
             if (castResultsC.collider)
             {
-                if (castResultsC.collider.bounds.min.x + 0.01f  > playerCollider.bounds.max.x) // verifier que on n'est pas juste posés sur le sol
+                if (castResultsC.collider.bounds.min.x >= playerCollider.bounds.max.x) // verifier que on n'est pas juste posés sur le sol
                     futurePosition = new Vector2(Mathf.Min(castResultsC.point.x - playerCollider.bounds.extents.x, futurePosition.x), futurePosition.y);
                 speedManager(Direction.RIGHT);
             }
@@ -154,7 +154,7 @@ public class VerticalCollide : MonoBehaviour {
         {
             if ( castResultsB.collider)
             {
-                 if (castResultsB.collider.bounds.min.y + 0.01f >= playerCollider.bounds.max.y)
+                 if (castResultsB.collider.bounds.min.y >= playerCollider.bounds.max.y)
                 {
                     futurePosition = new Vector2(futurePosition.x, Mathf.Min(castResultsB.point.y - playerCollider.bounds.extents.y, futurePosition.y));
                 }
@@ -162,7 +162,7 @@ public class VerticalCollide : MonoBehaviour {
             }
             if ( castResultsA.collider)
             {
-                 if (castResultsA.collider.bounds.min.y + 0.01f >= playerCollider.bounds.max.y)
+                 if (castResultsA.collider.bounds.min.y >= playerCollider.bounds.max.y)
                 {
                     futurePosition = new Vector2(futurePosition.x, Mathf.Min(castResultsA.point.y - playerCollider.bounds.extents.y, futurePosition.y));
                 }
@@ -175,7 +175,7 @@ public class VerticalCollide : MonoBehaviour {
         {
             if (castResultsC.collider)
             {
-                 if(castResultsC.collider.bounds.max.y - 0.01f <= playerCollider.bounds.min.y)
+                 if(castResultsC.collider.bounds.max.y <= playerCollider.bounds.min.y)
                 {
                     futurePosition = new Vector2(futurePosition.x, Mathf.Max(castResultsC.point.y + playerCollider.bounds.extents.y, futurePosition.y));
                 }
@@ -183,10 +183,10 @@ public class VerticalCollide : MonoBehaviour {
             }
             if ( castResultsD.collider)
             {
-                 if (castResultsC.collider.bounds.max.y - 0.01f <= playerCollider.bounds.min.y)
+                 if (castResultsD.collider.bounds.max.y <= playerCollider.bounds.min.y)
                 {
 
-                    futurePosition = new Vector2(futurePosition.x, Mathf.Max(castResultsC.point.y + playerCollider.bounds.extents.y, futurePosition.y));
+                    futurePosition = new Vector2(futurePosition.x, Mathf.Max(castResultsD.point.y + playerCollider.bounds.extents.y, futurePosition.y));
                 }
                 speedManager(Direction.DOWN);
             }
