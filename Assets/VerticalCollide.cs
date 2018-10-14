@@ -7,7 +7,7 @@ public class VerticalCollide : MonoBehaviour {
 
     private Collider2D playerCollider;
 
-    private Transform playerTrasform;
+    private Transform playerTransform;
 
     public float verticalSpeed  = 0;
     public float VerticalSpeed {
@@ -30,6 +30,7 @@ public class VerticalCollide : MonoBehaviour {
     public float precision;
 
 
+
     enum Direction
     {
         UP,
@@ -44,7 +45,7 @@ public class VerticalCollide : MonoBehaviour {
     void Start()
     {
         playerCollider = GetComponent<Collider2D>();
-        playerTrasform = GetComponent<Transform>();
+        playerTransform = GetComponent<Transform>();
     }
 
 /*
@@ -108,7 +109,7 @@ public class VerticalCollide : MonoBehaviour {
         Debug.DrawRay(rayD.origin, rayD.direction, Color.green);
 
 
-        Vector2 futurePosition = playerTrasform.position + new Vector3(horizontalSpeed, verticalSpeed);
+        Vector3 futurePosition = playerTransform.position + new Vector3(horizontalSpeed, verticalSpeed);
 
        
 
@@ -118,7 +119,7 @@ public class VerticalCollide : MonoBehaviour {
         {
             if ( castResultsB.collider)
             {
-                 if (castResultsB.collider.bounds.min.y + precision >= playerCollider.bounds.max.y)
+                 if (castResultsB.collider.bounds.min.y + precision >= playerCollider.bounds.max.y && castResultsB.collider.gameObject.tag != "MovingPlatform")
                 {
                     futurePosition = new Vector2(futurePosition.x, Mathf.Min(castResultsB.point.y - playerCollider.bounds.extents.y, futurePosition.y));
                 speedManager(Direction.UP);
@@ -126,7 +127,7 @@ public class VerticalCollide : MonoBehaviour {
             }
             if ( castResultsA.collider)
             {
-                 if (castResultsA.collider.bounds.min.y + precision  >= playerCollider.bounds.max.y)
+                 if (castResultsA.collider.bounds.min.y + precision  >= playerCollider.bounds.max.y && castResultsA.collider.gameObject.tag != "MovingPlatform")
                 {
                     futurePosition = new Vector2(futurePosition.x, Mathf.Min(castResultsA.point.y - playerCollider.bounds.extents.y, futurePosition.y));
                 speedManager(Direction.UP);
@@ -137,21 +138,38 @@ public class VerticalCollide : MonoBehaviour {
         // collide down
         if (verticalSpeed < 0) //else
         {
+            bool playerAlreadyOnBoard = false;
             if (castResultsC.collider)
             {
                  if(castResultsC.collider.bounds.max.y - precision <= playerCollider.bounds.min.y)
                 {
                     futurePosition = new Vector2(futurePosition.x, Mathf.Max(castResultsC.point.y + playerCollider.bounds.extents.y, futurePosition.y));
                 speedManager(Direction.DOWN);
+                    if(castResultsC.collider.gameObject.tag == "MovingPlatform" && castResultsC.collider.gameObject.GetComponent<MovingPlatform>().curMove == MovingPlatform.MovementType.horizontal && !playerAlreadyOnBoard)
+                    {
+                        Debug.Log("Player aboard");
+                        float newSpeed = castResultsC.collider.gameObject.GetComponent<MovingPlatform>().speed * Time.deltaTime * castResultsC.collider.gameObject.GetComponent<MovingPlatform>().startingDirection;
+                        horizontalSpeed = newSpeed;
+                        futurePosition += new Vector3(horizontalSpeed, verticalSpeed, 0);
+                        playerAlreadyOnBoard = true;
+                    }
                 }
             }
             if ( castResultsD.collider)
             {
-                 if (castResultsD.collider.bounds.max.y - precision <= playerCollider.bounds.min.y)
+                if (castResultsD.collider.bounds.max.y - precision <= playerCollider.bounds.min.y)
                 {
 
                     futurePosition = new Vector2(futurePosition.x, Mathf.Max(castResultsD.point.y + playerCollider.bounds.extents.y, futurePosition.y));
-                speedManager(Direction.DOWN);
+                    speedManager(Direction.DOWN);
+                    if (castResultsD.collider.gameObject.tag == "MovingPlatform" && castResultsD.collider.gameObject.GetComponent<MovingPlatform>().curMove == MovingPlatform.MovementType.horizontal && !playerAlreadyOnBoard)
+                    {
+                        Debug.Log("Player aboard");
+                        float newSpeed = castResultsD.collider.gameObject.GetComponent<MovingPlatform>().speed * Time.deltaTime * castResultsD.collider.gameObject.GetComponent<MovingPlatform>().startingDirection;
+                        horizontalSpeed = newSpeed;
+                        futurePosition += new Vector3(horizontalSpeed, verticalSpeed, 0);
+                        playerAlreadyOnBoard = true;
+                    }
                 }
             }
         }
@@ -162,7 +180,7 @@ public class VerticalCollide : MonoBehaviour {
         {
             if (castResultsA.collider)
             {
-                if (castResultsA.collider.bounds.max.x - precision <= playerCollider.bounds.min.x)
+                if (castResultsA.collider.bounds.max.x - precision <= playerCollider.bounds.min.x && castResultsA.collider.gameObject.tag != "MovingPlatform")
                 {
                     futurePosition = new Vector2(Mathf.Max(castResultsA.collider.bounds.max.x + playerCollider.bounds.extents.x, futurePosition.x), futurePosition.y);
                     speedManager(Direction.LEFT);
@@ -170,7 +188,7 @@ public class VerticalCollide : MonoBehaviour {
             }
             if (castResultsD.collider)
             {
-                if (castResultsD.collider.bounds.max.x - precision <= playerCollider.bounds.min.x)
+                if (castResultsD.collider.bounds.max.x - precision <= playerCollider.bounds.min.x && castResultsD.collider.gameObject.tag != "MovingPlatform")
                 {
                     futurePosition = new Vector2(Mathf.Max(castResultsD.collider.bounds.max.x + playerCollider.bounds.extents.x, futurePosition.x), futurePosition.y);
                     speedManager(Direction.LEFT);
@@ -185,7 +203,7 @@ public class VerticalCollide : MonoBehaviour {
         {
             if (castResultsB.collider)
             {
-                if (castResultsB.collider.bounds.min.x + precision >= playerCollider.bounds.max.x) // verifier que on n'est pas juste posés sur le plafond
+                if (castResultsB.collider.bounds.min.x + precision >= playerCollider.bounds.max.x && castResultsB.collider.gameObject.tag != "MovingPlatform") // verifier que on n'est pas juste posés sur le plafond
                     futurePosition = new Vector2(Mathf.Min(castResultsB.point.x - playerCollider.bounds.extents.x, futurePosition.x), futurePosition.y);
 
 
@@ -193,13 +211,13 @@ public class VerticalCollide : MonoBehaviour {
             }
             if (castResultsC.collider)
             {
-                if (castResultsC.collider.bounds.min.x + precision >= playerCollider.bounds.max.x) // verifier que on n'est pas juste posés sur le sol
+                if (castResultsC.collider.bounds.min.x + precision >= playerCollider.bounds.max.x && castResultsC.collider.gameObject.tag != "MovingPlatform") // verifier que on n'est pas juste posés sur le sol
                     futurePosition = new Vector2(Mathf.Min(castResultsC.point.x - playerCollider.bounds.extents.x, futurePosition.x), futurePosition.y);
                 speedManager(Direction.RIGHT);
             }
         }
 
-        playerTrasform.position = futurePosition;
+        playerTransform.position = futurePosition;
 
     }
 

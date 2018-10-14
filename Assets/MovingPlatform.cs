@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovingPlatform : MonoBehaviour {
+public class MovingPlatform : MonoBehaviour
+{
     public float range;
     public enum MovementType { horizontal, vertical };
     public MovementType curMove;
@@ -12,13 +13,16 @@ public class MovingPlatform : MonoBehaviour {
 
 
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         startingPosition = transform.position;
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    }
+
+
+    // Update is called once per frame
+    void Update()
+    {
         switch (curMove)
         {
             case MovementType.horizontal:
@@ -49,5 +53,6 @@ public class MovingPlatform : MonoBehaviour {
                 }
                 break;
         }
-	}
+    }
+
 }
