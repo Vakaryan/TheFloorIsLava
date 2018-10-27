@@ -5,23 +5,35 @@ using UnityEngine;
 public class PlayerMovements : MonoBehaviour {
     public float speed;
     public float dashSpeed;
-    public float dashDist;
     private bool dashing = false;
-    private float oldPos;
+    private int oldDir = 1;
     private int dir;
+    public int timerDash;
+    private int timer;
 
 
     private VerticalCollide vertPhysics;
 
     // Use this for initialization
     void Start () {
-        oldPos = transform.position.x;
         dir = 1;
         vertPhysics = GetComponent<VerticalCollide>();
+        timer = timerDash;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+        if(vertPhysics.HorizontalSpeed != 0)
+        {
+            if(vertPhysics.HorizontalSpeed > 0)
+            {
+                oldDir = 1;
+            }
+            else
+            {
+                oldDir = -1;
+            }
+        }
         if (!dashing)
         {
             vertPhysics.HorizontalSpeed = Input.GetAxis("Horizontal") * speed;
@@ -29,11 +41,21 @@ public class PlayerMovements : MonoBehaviour {
         }
         else
         {
-            Dash();
+            if (timer >= 0)
+            {
+                Debug.Log("Dashing");
+                vertPhysics.HorizontalSpeed += dashSpeed * dir * Time.deltaTime;
+                timer--;
+            }
+            else
+            {
+                timer = timerDash;
+                dashing = false;
+            }
         }
         if (Input.GetButtonDown("Dash"))
         {
-            oldPos = transform.position.x;
+            SetDir();
             dashing = true;
         }
 	}
@@ -41,38 +63,20 @@ public class PlayerMovements : MonoBehaviour {
 
     private void SetDir()
     {
-        if(oldPos < transform.position.x) //to the right
+        if(vertPhysics.HorizontalSpeed > 0) //to the right
         {
             dir = 1;
         }
-        if(oldPos > transform.position.x) //to the left
+        else if(vertPhysics.HorizontalSpeed < 0) //to the left
         {
             dir = -1;
         }
-    }
-
-
-    private void Dash() { 
-        Debug.Log("Dashing");
-        if (dir == 1)   //moving to the right
+        else
         {
-            transform.position += new Vector3(dashSpeed* Time.deltaTime, 0, 0);
-            if (transform.position.x - oldPos >= dashDist)
-            {
-                oldPos = transform.position.x;
-                dashing = false;
-            }
-        }
-        if (dir == -1)  //moving to the left
-        {
-            transform.position -= new Vector3(dashSpeed* Time.deltaTime, 0, 0);
-            if (oldPos - transform.position.x >= dashDist)
-            {
-                oldPos = transform.position.x;
-                dashing = false;
-            }
+            dir = oldDir;
         }
     }
+
 
 }
 

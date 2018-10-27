@@ -3827,7 +3827,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: Jump
-  impulseForce: 1
+  impulseForce: 0.7
 --- !u!114 &812867194
 MonoBehaviour:
   m_ObjectHideFlags: 0
