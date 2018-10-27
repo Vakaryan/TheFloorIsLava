@@ -209,7 +209,6 @@ public class VerticalCollide : MonoBehaviour {
                 if (castResultsD.collider.bounds.max.x - precision <= playerCollider.bounds.min.x && castResultsD.collider.gameObject.tag != "MovingPlatform")
                 {
                     futurePosition = new Vector2(Mathf.Max(castResultsD.collider.bounds.max.x + playerCollider.bounds.extents.x, futurePosition.x), futurePosition.y);
-                    speedManager(Direction.LEFT);
                 }
             }
         }
@@ -231,7 +230,6 @@ public class VerticalCollide : MonoBehaviour {
             {
                 if (castResultsC.collider.bounds.min.x + precision >= playerCollider.bounds.max.x && castResultsC.collider.gameObject.tag != "MovingPlatform") // verifier que on n'est pas juste posés sur le sol
                     futurePosition = new Vector2(Mathf.Min(castResultsC.point.x - playerCollider.bounds.extents.x, futurePosition.x), futurePosition.y);
-                speedManager(Direction.RIGHT);
             }
         }
 
