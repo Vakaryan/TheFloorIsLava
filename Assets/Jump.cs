@@ -17,7 +17,7 @@ public class Jump : MonoBehaviour {
     void Update () {
 		if (Input.GetButtonDown(button))
         {
-            vertPhysics.VerticalSpeed += impulseForce;
+            vertPhysics.VerticalSpeed = impulseForce;
         }
 	}
 }

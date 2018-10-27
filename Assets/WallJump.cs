@@ -25,8 +25,8 @@ public class WallJump : MonoBehaviour {
     {
         if (Input.GetButtonDown(button))
         {
-            vertPhysics.VerticalSpeed += impulseForce;
-            vertPhysics.HorizontalSpeed += (jumpDirection == Direction.RIGHT ? 1 : -1) * impulseForce;
+            vertPhysics.HorizontalSpeed = (jumpDirection == Direction.RIGHT ? 1 : -1) * impulseForce;
+            vertPhysics.VerticalSpeed = impulseForce;
             GetComponent<Jump>().enabled = true;
             enabled = false;
         }

@@ -136,16 +136,55 @@ public class VerticalCollide : MonoBehaviour {
         }
 
         // collide down
-        if (verticalSpeed < 0) //else
+        if (verticalSpeed < 0) 
         {
             bool playerAlreadyOnBoard = false;
             if (castResultsC.collider)
             {
-                 if(castResultsC.collider.bounds.max.y - precision <= playerCollider.bounds.min.y)
+                if (castResultsC.collider.bounds.max.y - precision <= playerCollider.bounds.min.y)
                 {
                     futurePosition = new Vector2(futurePosition.x, Mathf.Max(castResultsC.point.y + playerCollider.bounds.extents.y, futurePosition.y));
-                speedManager(Direction.DOWN);
-                    if(castResultsC.collider.gameObject.tag == "MovingPlatform" && castResultsC.collider.gameObject.GetComponent<MovingPlatform>().curMove == MovingPlatform.MovementType.horizontal && !playerAlreadyOnBoard)
+                    speedManager(Direction.DOWN);
+                    if (castResultsC.collider.gameObject.tag == "MovingPlatform" && castResultsC.collider.gameObject.GetComponent<MovingPlatform>().curMove == MovingPlatform.MovementType.vertical && castResultsC.collider.gameObject.GetComponent<MovingPlatform>().startingDirection>0 && !playerAlreadyOnBoard)
+                    {
+                        Debug.Log("Player aboard");
+                        float newSpeed = castResultsC.collider.gameObject.GetComponent<MovingPlatform>().speed * Time.deltaTime * castResultsC.collider.gameObject.GetComponent<MovingPlatform>().startingDirection;
+                        verticalSpeed = newSpeed;
+                        futurePosition += new Vector3(horizontalSpeed, verticalSpeed, 0);
+                        playerAlreadyOnBoard = true;
+                    }
+                }
+            }
+            if (castResultsD.collider)
+            {
+                if (castResultsD.collider.bounds.max.y - precision <= playerCollider.bounds.min.y)
+                {
+
+                    futurePosition = new Vector2(futurePosition.x, Mathf.Max(castResultsD.point.y + playerCollider.bounds.extents.y, futurePosition.y));
+                    speedManager(Direction.DOWN);
+                    if (castResultsD.collider.gameObject.tag == "MovingPlatform" && castResultsD.collider.gameObject.GetComponent<MovingPlatform>().curMove == MovingPlatform.MovementType.vertical && castResultsD.collider.gameObject.GetComponent<MovingPlatform>().startingDirection > 0 && !playerAlreadyOnBoard)
+                    {
+                        Debug.Log("Player aboard");
+                        float newSpeed = castResultsD.collider.gameObject.GetComponent<MovingPlatform>().speed * Time.deltaTime * castResultsD.collider.gameObject.GetComponent<MovingPlatform>().startingDirection;
+                        verticalSpeed = newSpeed;
+                        futurePosition += new Vector3(horizontalSpeed, verticalSpeed, 0);
+                        playerAlreadyOnBoard = true;
+                    }
+                }
+            }
+        }
+
+        else
+        {
+            bool playerAlreadyOnBoard = false;
+            if (castResultsC.collider)
+            {
+                if (castResultsC.collider.bounds.max.y - precision <= playerCollider.bounds.min.y && castResultsC.collider.gameObject.tag == "MovingPlatform")
+                {
+                    futurePosition = new Vector2(futurePosition.x, Mathf.Max(castResultsC.point.y + playerCollider.bounds.extents.y, futurePosition.y));
+                    GetComponent<Jump>().enabled = true;
+                    GetComponent<WallJump>().enabled = false;
+                    if (castResultsC.collider.gameObject.tag == "MovingPlatform" && castResultsC.collider.gameObject.GetComponent<MovingPlatform>().curMove == MovingPlatform.MovementType.horizontal && !playerAlreadyOnBoard)
                     {
                         Debug.Log("Player aboard");
                         float newSpeed = castResultsC.collider.gameObject.GetComponent<MovingPlatform>().speed * Time.deltaTime * castResultsC.collider.gameObject.GetComponent<MovingPlatform>().startingDirection;
@@ -155,13 +194,13 @@ public class VerticalCollide : MonoBehaviour {
                     }
                 }
             }
-            if ( castResultsD.collider)
+            if (castResultsD.collider)
             {
-                if (castResultsD.collider.bounds.max.y - precision <= playerCollider.bounds.min.y)
+                if (castResultsD.collider.bounds.max.y - precision <= playerCollider.bounds.min.y && castResultsD.collider.gameObject.tag == "MovingPlatform")
                 {
-
-                    futurePosition = new Vector2(futurePosition.x, Mathf.Max(castResultsD.point.y + playerCollider.bounds.extents.y, futurePosition.y));
-                    speedManager(Direction.DOWN);
+                    futurePosition = new Vector2(futurePosition.x, Mathf.Max(castResultsC.point.y + playerCollider.bounds.extents.y, futurePosition.y));
+                    GetComponent<Jump>().enabled = true;
+                    GetComponent<WallJump>().enabled = false;
                     if (castResultsD.collider.gameObject.tag == "MovingPlatform" && castResultsD.collider.gameObject.GetComponent<MovingPlatform>().curMove == MovingPlatform.MovementType.horizontal && !playerAlreadyOnBoard)
                     {
                         Debug.Log("Player aboard");
@@ -173,6 +212,7 @@ public class VerticalCollide : MonoBehaviour {
                 }
             }
         }
+
 
         //  collide left
 
