@@ -3827,7 +3827,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: Jump
-  impulseForce: 0.7
+  impulseForce: 0.8
 --- !u!114 &812867194
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3854,7 +3854,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: Jump
-  impulseForce: 1
+  impulseForceH: 50
+  impulseForceV: 25
+  timerWallJump: 7
 --- !u!1 &820974946
 GameObject:
   m_ObjectHideFlags: 0

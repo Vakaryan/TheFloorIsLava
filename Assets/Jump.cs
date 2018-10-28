@@ -28,7 +28,6 @@ public class Jump : MonoBehaviour {
             else
             {
                 jumpCount = 0;
-                enabled = false;
             }
         }
 	}

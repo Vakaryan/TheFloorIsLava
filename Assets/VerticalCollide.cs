@@ -252,12 +252,14 @@ public class VerticalCollide : MonoBehaviour {
                 GetComponent<Jump>().enabled = false;
                 GetComponent<WallJump>().enabled = true;
                 GetComponent<WallJump>().JumpDirection = WallJump.Direction.RIGHT;
+                GetComponent<WallJump>().IsWalljumping = false;
                 break;
             case Direction.RIGHT:
                 Debug.Log("right");
                 GetComponent<Jump>().enabled = false;
                 GetComponent<WallJump>().enabled = true;
                 GetComponent<WallJump>().JumpDirection = WallJump.Direction.LEFT;
+                GetComponent<WallJump>().IsWalljumping = false;
                 break;
             case Direction.DOWN:
                 Debug.Log("down");
